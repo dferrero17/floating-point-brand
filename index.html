@@ -557,11 +557,13 @@
   }
   .bcard.fold-h .end-label.l { left: 30px; }
   .bcard.fold-h .end-label.r { right: 30px; }
-  .bcard.fold-h .serial {
-    position: absolute; right: 28px; bottom: 18px;
+  .bcard.fold-h .fold-mark {
+    position: absolute; left: 50%;
+    top: calc(50% - 18px);
+    transform: translate(-50%, 0);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--fog);
+    font-size: 9px; color: var(--fog);
+    letter-spacing: 0.04em; white-space: nowrap;
   }
 
   /* vertical fold — 85 × 110, opens top↔bottom */
@@ -1713,26 +1715,79 @@
           <!-- horizontal fold -->
           <div class="alt-block" style="margin-top: 24px;">
             <span class="alt-tag">fold · horizontal / 170 × 55</span>
-            <h4>opens book-style. interior is one long axis.</h4>
-            <p class="alt-note">a single horizontal axis runs the full 170mm with mono ticks. one ink dot sits at the cardholder's coordinate, labelled below in jetbrains mono. the crease falls at 50%, so the fold itself becomes the origin of the line.</p>
+            <h4>opens book-style. the line carries meaning.</h4>
+            <p class="alt-note">interior is a single axis, full 170mm, with one ink dot. the fold lands at the midpoint of the range — its natural origin — so opening the card moves you from one half of the range to the other. cover unchanged. three semantics for the line itself, same visual structure.</p>
             <div class="fold-demo">
               <div class="state">
-                <span class="state-label">closed · 85 × 55mm</span>
+                <span class="state-label">closed · 85 × 55mm · cover</span>
                 <div class="bcard front closed-frame">
                   <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- variant a · number line -->
+          <div class="alt-block" style="margin-top: 32px;">
+            <span class="alt-tag">a · number line</span>
+            <h4>a fundamental constant, plotted on [−1, +1].</h4>
+            <p class="alt-note">axis runs from −1 to +1, fold at the origin. each cardholder picks a mathematical constant — the golden ratio, 1/π, e⁻¹ — and the dot marks where it falls. the card carries them as a fixed point on the real line. literal floating point.</p>
+            <div class="fold-demo">
               <div class="state">
                 <span class="state-label">opened · interior · 170 × 55mm</span>
                 <div class="bcard fold-h">
                   <div class="fold-line"></div>
                   <div class="ticks"></div>
                   <div class="axis-rail"></div>
-                  <span class="end-label l">0.000</span>
-                  <span class="end-label r">1.000</span>
-                  <div class="pt" style="left: 38.2%;"></div>
-                  <div class="pt-label" style="left: 38.2%;">x · 0.382</div>
-                  <span class="serial">card · no. 014</span>
+                  <span class="end-label l">−1</span>
+                  <span class="end-label r">+1</span>
+                  <span class="fold-mark">0</span>
+                  <div class="pt" style="left: 80.9%;"></div>
+                  <div class="pt-label" style="left: 80.9%;">1/φ · 0.618</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- variant b · timeline -->
+          <div class="alt-block" style="margin-top: 32px;">
+            <span class="alt-tag">b · timeline</span>
+            <h4>the print date, as a floating-point year.</h4>
+            <p class="alt-note">axis runs from founding (2024) to a four-year horizon (2028), fold at the midpoint year. dot at the print date encoded as a decimal year — may 5, 2026 = 2026.342. each card is the moment it was printed. reprinted batches read forward across the line.</p>
+            <div class="fold-demo">
+              <div class="state">
+                <span class="state-label">opened · interior · 170 × 55mm</span>
+                <div class="bcard fold-h">
+                  <div class="fold-line"></div>
+                  <div class="ticks"></div>
+                  <div class="axis-rail"></div>
+                  <span class="end-label l">2024</span>
+                  <span class="end-label r">2028</span>
+                  <span class="fold-mark">2026</span>
+                  <div class="pt" style="left: 58.55%;"></div>
+                  <div class="pt-label" style="left: 58.55%;">2026.342 · today</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- variant c · longitude -->
+          <div class="alt-block" style="margin-top: 32px;">
+            <span class="alt-tag">c · longitude</span>
+            <h4>the office, plotted on the meridian.</h4>
+            <p class="alt-note">axis runs −10° to −8° longitude, fold on the −9° meridian. dot at lisbon (−9.139°). reads literally — the line on the card is the line of longitude the address on the back sits on. ports the brand to other cities by changing one number.</p>
+            <div class="fold-demo">
+              <div class="state">
+                <span class="state-label">opened · interior · 170 × 55mm</span>
+                <div class="bcard fold-h">
+                  <div class="fold-line"></div>
+                  <div class="ticks"></div>
+                  <div class="axis-rail"></div>
+                  <span class="end-label l">−10°</span>
+                  <span class="end-label r">−8°</span>
+                  <span class="fold-mark">−9°</span>
+                  <div class="pt" style="left: 43.05%;"></div>
+                  <div class="pt-label" style="left: 43.05%;">lisboa · −9.139°</div>
                 </div>
               </div>
             </div>
