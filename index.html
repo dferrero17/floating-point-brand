@@ -338,6 +338,7 @@
 
   /* business card — 85 × 55 mm */
   .bcards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .bcards.bcards-quad { grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .bcard {
     aspect-ratio: 85 / 55;
     background: var(--paper);
@@ -364,6 +365,131 @@
   .bcard.back .contact .val { color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
   .bcard.dark { background: var(--ink); }
   .bcard.dark .lockup { color: var(--paper); }
+
+  /* business card alternatives */
+  .alt-block { display: flex; flex-direction: column; gap: 8px; }
+  .alt-block .alt-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fog);
+  }
+  .alt-block h4 {
+    margin: 0; font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em;
+  }
+  .alt-block p.alt-note {
+    margin: 0 0 8px; font-size: 13px; color: var(--ink-soft); max-width: 60ch;
+  }
+
+  /* alt 1 — coordinate card */
+  .bcard.coord { display: block; }
+  .bcard.coord .axes-h, .bcard.coord .axes-v {
+    position: absolute; border-style: dashed; border-color: var(--rule-soft);
+  }
+  .bcard.coord .axes-h { left: 28px; right: 28px; top: 50%; border-top-width: 1px; border-left: 0; border-right: 0; border-bottom: 0; }
+  .bcard.coord .axes-v { top: 28px; bottom: 44px; left: 50%; border-left-width: 1px; border-top: 0; border-right: 0; border-bottom: 0; }
+  .bcard.coord .pt {
+    position: absolute; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--ink); transform: translate(-50%, -50%);
+  }
+  .bcard.coord .pt-label {
+    position: absolute; transform: translate(-50%, calc(-100% - 12px));
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--fog);
+    letter-spacing: 0.04em; white-space: nowrap;
+  }
+  .bcard.coord .footer {
+    position: absolute; left: 28px; right: 28px; bottom: 22px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .bcard.coord .footer .lockup-mini { width: 78px; color: var(--ink); }
+  .bcard.coord .footer .meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--fog);
+  }
+
+  /* alt 2 — spec-sheet back */
+  .bcard.spec {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; line-height: 1.85;
+    color: var(--ink);
+  }
+  .bcard.spec .com { color: var(--fog); }
+  .bcard.spec .hr { color: var(--fog); letter-spacing: -0.04em; }
+
+  /* alt 3 — vertical 55 × 85 */
+  .bcard.vert {
+    aspect-ratio: 55 / 85;
+    padding: 20px;
+    display: grid; grid-template-rows: auto 1fr auto;
+    color: var(--ink-soft);
+  }
+  .bcard.vert .lockup-top { width: 70%; color: var(--ink); }
+  .bcard.vert.front-v {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bcard.vert.front-v .lockup { width: 70%; transform: rotate(-90deg); color: var(--ink); }
+  .bcard.vert .ident { align-self: end; }
+  .bcard.vert .name { font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; line-height: 1.15; }
+  .bcard.vert .role { font-size: 10px; color: var(--fog); margin-top: 4px; }
+  .bcard.vert .contact { display: flex; flex-direction: column; gap: 4px; margin-top: 14px; }
+  .bcard.vert .contact .row { display: flex; flex-direction: column; gap: 1px; }
+  .bcard.vert .contact .lab {
+    color: var(--fog); font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .bcard.vert .contact .val {
+    color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  /* alt 4 — blind deboss + edge paint */
+  .bcard.deboss { display: flex; align-items: center; justify-content: center; }
+  .bcard.deboss .lockup {
+    width: 65%;
+    color: var(--paper);
+    filter:
+      drop-shadow(0 1px 0 rgba(255,255,255,0.7))
+      drop-shadow(0 -1px 0 rgba(20,20,26,0.18));
+  }
+  .bcard.edge-ink::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 4px; background: var(--ink);
+  }
+
+  /* alt 5 — vellum overlay */
+  .bcard-stack {
+    position: relative;
+    aspect-ratio: 85 / 55;
+  }
+  .bcard-stack .layer {
+    position: absolute; inset: 0;
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    padding: 28px;
+    overflow: hidden;
+  }
+  .bcard-stack .layer.under {
+    background: var(--paper);
+    display: grid; grid-template-rows: auto 1fr auto;
+    color: var(--ink-soft);
+  }
+  .bcard-stack .layer.under .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .bcard-stack .layer.under .top .lockup { width: 100px; color: var(--ink); }
+  .bcard-stack .layer.under .name { font-size: 19px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .bcard-stack .layer.under .role { font-size: 12px; color: var(--fog); margin-top: 2px; }
+  .bcard-stack .layer.under .contact { display: flex; flex-direction: column; gap: 4px; align-self: end; font-size: 12px; }
+  .bcard-stack .layer.under .contact .row { display: grid; grid-template-columns: 60px 1fr; gap: 8px; }
+  .bcard-stack .layer.under .contact .lab { color: var(--fog); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding-top: 1px; }
+  .bcard-stack .layer.under .contact .val { color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .bcard-stack .layer.vellum {
+    background: rgba(245, 243, 238, 0.62);
+    border-color: rgba(20, 20, 26, 0.14);
+    transform: translate(10px, -10px) rotate(-1.6deg);
+    box-shadow: 0 14px 28px -10px rgba(20, 20, 26, 0.18), 0 2px 6px rgba(20, 20, 26, 0.06);
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(0.5px);
+  }
+  .bcard-stack .layer.vellum .lockup { width: 60%; color: var(--ink); opacity: 0.78; }
 
   /* letterhead — A4 ratio 1:1.414 */
   .letterhead {
@@ -684,6 +810,7 @@
     .specrow, .specrow.three, .specrow.four,
     .swatches, .variants, .merch-grid, .digital-grid,
     .bcards, .fonts, .print-pair { grid-template-columns: 1fr; }
+    .bcards.bcards-quad { grid-template-columns: 1fr 1fr; }
 
     section > header { gap: 16px; padding-bottom: 16px; margin-bottom: 24px; }
     h2.display { font-size: 36px; }
@@ -1297,6 +1424,181 @@
                 <div class="row"><span class="lab">mail</span><span class="val">priya@floatingpoint.io</span></div>
                 <div class="row"><span class="lab">tel</span> <span class="val">+1 415 555 0188</span></div>
                 <div class="row"><span class="lab">git</span> <span class="val">github.com/piyer</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- business card — alternatives -->
+        <div>
+          <h3>business card · alternatives</h3>
+          <p>five directions, all within the existing palette and type system. shown alongside the standard pair above for comparison.</p>
+
+          <!-- alt 1: coordinate -->
+          <div class="alt-block" style="margin-top: 24px;">
+            <span class="alt-tag">alt · 01 / coordinate</span>
+            <h4>a single point per cardholder.</h4>
+            <p class="alt-note">front carries one ink dot at unique (x, y) coordinates per employee, with the value set in jetbrains mono. the wordmark moves to the bottom-left as a minor mark. back unchanged. literal "floating point" — every card different, the system is a position, not a graphic.</p>
+            <div class="bcards">
+              <div class="bcard coord">
+                <div class="axes-h"></div>
+                <div class="axes-v"></div>
+                <div class="pt" style="left: 38.2%; top: 38.3%;"></div>
+                <div class="pt-label" style="left: 38.2%; top: 38.3%;">x 0.382 · y 0.617</div>
+                <div class="footer">
+                  <svg class="lockup-mini" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                  <span class="meta">no. 014</span>
+                </div>
+              </div>
+              <div class="bcard back">
+                <div class="top">
+                  <div>
+                    <div class="name">daniel ferreira</div>
+                    <div class="role">co-founder · floating point</div>
+                  </div>
+                  <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                </div>
+                <div></div>
+                <div class="contact">
+                  <div class="row"><span class="lab">mail</span><span class="val">daniel@floatingpoint.pt</span></div>
+                  <div class="row"><span class="lab">tel</span> <span class="val">+351 21 555 0114</span></div>
+                  <div class="row"><span class="lab">addr</span><span class="val">rua da prata 80, lisboa</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- alt 2: spec-sheet -->
+          <div class="alt-block" style="margin-top: 40px;">
+            <span class="alt-tag">alt · 02 / spec-sheet</span>
+            <h4>the back as a code-comment block.</h4>
+            <p class="alt-note">contact rows replaced with a left-aligned mono comment header — the kind that sits at the top of a source file. ragged, unlabelled, no key/value grid. leans into the engineering voice already established in the brand.</p>
+            <div class="bcards">
+              <div class="bcard front">
+                <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+              </div>
+              <div class="bcard spec">
+                <div><span class="hr">// ──────────────────────────────</span></div>
+                <div><span class="com">//</span> daniel ferreira</div>
+                <div><span class="com">//</span> co-founder · floating point</div>
+                <div><span class="com">//</span></div>
+                <div><span class="com">//</span> daniel@floatingpoint.pt</div>
+                <div><span class="com">//</span> +351 21 555 0114</div>
+                <div><span class="com">//</span> rua da prata 80, lisboa</div>
+                <div><span class="hr">// ──────────────────────────────</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- alt 3: vertical -->
+          <div class="alt-block" style="margin-top: 40px;">
+            <span class="alt-tag">alt · 03 / vertical</span>
+            <h4>portrait orientation.</h4>
+            <p class="alt-note">55 × 85mm rotated. front wordmark sits rotated −90° centred; back keeps a small horizontal wordmark at the top with name, role and contact stacked below in a single column. distinct in a stack of cards.</p>
+            <div class="bcards bcards-quad">
+              <div class="bcard vert front-v">
+                <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+              </div>
+              <div class="bcard vert">
+                <svg class="lockup-top" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                <div></div>
+                <div class="ident">
+                  <div class="name">daniel<br/>ferreira</div>
+                  <div class="role">co-founder</div>
+                  <div class="contact">
+                    <div class="row"><span class="lab">mail</span><span class="val">daniel@floatingpoint.pt</span></div>
+                    <div class="row"><span class="lab">tel</span><span class="val">+351 21 555 0114</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bcard vert front-v dark">
+                <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+              </div>
+              <div class="bcard vert">
+                <svg class="lockup-top" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                <div></div>
+                <div class="ident">
+                  <div class="name">priya<br/>iyer</div>
+                  <div class="role">staff engineer</div>
+                  <div class="contact">
+                    <div class="row"><span class="lab">mail</span><span class="val">priya@floatingpoint.io</span></div>
+                    <div class="row"><span class="lab">git</span><span class="val">github.com/piyer</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- alt 4: blind deboss + edge paint -->
+          <div class="alt-block" style="margin-top: 40px;">
+            <span class="alt-tag">alt · 04 / deboss + edge</span>
+            <h4>blind deboss, painted edge.</h4>
+            <p class="alt-note">front is pure paper with the wordmark blind-debossed (no ink — pressure only). card edge painted in ink so a stack reads as a thin floating line. premium feel; raises unit cost and contradicts the existing "no foil, no spot uv" copy — both would need revision.</p>
+            <div class="bcards">
+              <div class="bcard deboss edge-ink">
+                <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+              </div>
+              <div class="bcard back edge-ink">
+                <div class="top">
+                  <div>
+                    <div class="name">daniel ferreira</div>
+                    <div class="role">co-founder · floating point</div>
+                  </div>
+                  <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                </div>
+                <div></div>
+                <div class="contact">
+                  <div class="row"><span class="lab">mail</span><span class="val">daniel@floatingpoint.pt</span></div>
+                  <div class="row"><span class="lab">tel</span> <span class="val">+351 21 555 0114</span></div>
+                  <div class="row"><span class="lab">addr</span><span class="val">rua da prata 80, lisboa</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- alt 5: vellum overlay -->
+          <div class="alt-block" style="margin-top: 40px;">
+            <span class="alt-tag">alt · 05 / vellum overlay</span>
+            <h4>two pieces — translucent over solid.</h4>
+            <p class="alt-note">a translucent vellum slip carries the wordmark; the underlying card carries the contact info. reading the card requires lifting the slip — a physical analogue to "floating." two pieces double the print spec and are easier to lose.</p>
+            <div class="bcards">
+              <div class="bcard-stack">
+                <div class="layer under">
+                  <div class="top">
+                    <div>
+                      <div class="name">daniel ferreira</div>
+                      <div class="role">co-founder · floating point</div>
+                    </div>
+                  </div>
+                  <div></div>
+                  <div class="contact">
+                    <div class="row"><span class="lab">mail</span><span class="val">daniel@floatingpoint.pt</span></div>
+                    <div class="row"><span class="lab">tel</span> <span class="val">+351 21 555 0114</span></div>
+                    <div class="row"><span class="lab">addr</span><span class="val">rua da prata 80, lisboa</span></div>
+                  </div>
+                </div>
+                <div class="layer vellum">
+                  <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                </div>
+              </div>
+              <div class="bcard-stack">
+                <div class="layer under" style="background: var(--ink); color: var(--paper);">
+                  <div class="top">
+                    <div>
+                      <div class="name" style="color: var(--paper);">priya iyer</div>
+                      <div class="role">staff engineer · platform</div>
+                    </div>
+                  </div>
+                  <div></div>
+                  <div class="contact">
+                    <div class="row"><span class="lab">mail</span><span class="val" style="color: var(--paper);">priya@floatingpoint.io</span></div>
+                    <div class="row"><span class="lab">tel</span> <span class="val" style="color: var(--paper);">+1 415 555 0188</span></div>
+                    <div class="row"><span class="lab">git</span> <span class="val" style="color: var(--paper);">github.com/piyer</span></div>
+                  </div>
+                </div>
+                <div class="layer vellum">
+                  <svg class="lockup" viewBox="0 0 884.691 290.391"><use href="#wordmark"/></svg>
+                </div>
               </div>
             </div>
           </div>
